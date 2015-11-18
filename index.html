@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+    <title>first sql program</title>
+        <style>
+            td{
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <P> the contents of the database are:
+        
+        </P>
+        <table>
+            <thead><td>Student</td><td>donations</td></thead>
+            <tbody id="list">
+            
+            </tbody>
+        </table>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            $.ajax({
+                url:"http://localhost:9000/transaction",
+                
+                success:function(res){
+                    //console.log(res);
+                    //$("#list").html("<li>"+res+"</li>");
+                    res = eval(res);
+                    for (var i =0; i < res.length; i++){
+                        var cell = "<tr><td>"+res[i].sid+"</td><td>"
+                                         +res[i].donation+"</td></tr>";
+                        console.log(cell);
+                        $("#list").append(cell);
+                    }
+                    
+                }
+            });
+        </script>
+    </body>
+</html>
